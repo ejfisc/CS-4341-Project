@@ -1,5 +1,5 @@
 //----------------------------------------------------------------------------------------------------------------------------------------
-module Breadboard (w,x,y,x,r0,r1,r2,r3,r4,r5,r6,r7,r8,r9); //breadboard module
+module Breadboard (w,x,y,z,r0,r1,r2,r3,r4,r5,r6,r7,r8,r9); //breadboard module
 input w,x,y,z;
 output r0,r1,r2,r3,r4,r5,r6,r7,r8,r9;
 reg r0,r1,r2,r3,r4,r5,r6,r7,r8,r9;
@@ -65,14 +65,14 @@ module testbench(); //testbench module
       c = (i/2)%2;
       d = (i/1)%2; //low bit
 
-      #20000;
+      #20;
 
       $display("|%2d|%1d|%1d|%1d|%1d| %1d| %1d| %1d| %1d| %1d| %1d| %1d| %1d| %1d| %1d|",i,a,b,c,d,f0,f1,f2,f3,f4,f5,f6,f7,f8,f9);
       if(i%4==3)
 	$write("|--+-+-+-+-+--+--+--+--+--+--+--+--+--+--|\n");
 
     end
-    #20000;
+    #20;
     $finish;
   end
 endmodule
