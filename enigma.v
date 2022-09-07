@@ -5,7 +5,7 @@ output r0,r1,r2,r3,r4,r5,r6,r7,r8,r9;
 reg r0,r1,r2,r3,r4,r5,r6,r7,r8,r9;
 wire w,x,y,z;
 
-always @ (w,x,y,x,r0,r1,r2,r3,r4,r5,r6,r7,r8,r9) begin
+always @ (w,x,y,z,r0,r1,r2,r3,r4,r5,r6,r7,r8,r9) begin
 
   //minterm equations
 
@@ -37,7 +37,7 @@ always @ (w,x,y,x,r0,r1,r2,r3,r4,r5,r6,r7,r8,r9) begin
   r8 = (~w&~x&~y&~z)|(~w&~x&~y&z)|(~w&x&~y&z)|(~w&x&y&z)|(w&~x&y&~z)|(w&~x&y&z)|(w&x&~y&~z)|(w&x&y&~z)|(w&x&y&z);
 
   //f9 = w'xyz'   + w'xyz    + wx'y'z'    + wx'y'z     + wx'yz'    + wx'yz    + wxy'z'    + wxy'z
-  r9 = (~w&x&y&~z)|(~w&x&y&z)|(w&~x&~y&~z)|(w&~x&~y&~z)|(w&~x&y&~z)|(w&~x&y&z)|(w&x&~y&~z)|(w&x&~y&z);
+  r9 = (~w&x&y&~z)|(~w&x&y&z)|(w&~x&~y&~z)|(w&~x&~y&z)|(w&~x&y&~z)|(w&~x&y&z)|(w&x&~y&~z)|(w&x&~y&z);
 
   end
 endmodule
@@ -65,14 +65,14 @@ module testbench(); //testbench module
       c = (i/2)%2;
       d = (i/1)%2; //low bit
 
-      #20;
+      #200;
 
       $display("|%2d|%1d|%1d|%1d|%1d| %1d| %1d| %1d| %1d| %1d| %1d| %1d| %1d| %1d| %1d|",i,a,b,c,d,f0,f1,f2,f3,f4,f5,f6,f7,f8,f9);
       if(i%4==3)
 	$write("|--+-+-+-+-+--+--+--+--+--+--+--+--+--+--|\n");
 
     end
-    #20;
+    #200;
     $finish;
   end
 endmodule
