@@ -1,4 +1,0 @@
-run in terminal with commands
-
-iverlog -o a.out *.v
-vvp a.out
