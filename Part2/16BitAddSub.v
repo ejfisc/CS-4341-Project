@@ -74,26 +74,26 @@ assign carry = c16;
 assign overflow = c16^c15;
 endmodule
 
-/*
+
 module testbench();
 //Data Inputs
 reg [15:0]dataA;
 reg [15:0]dataB;
 reg mode;
 //Outputs
-wire[15:0]result;
+wire[31:0]result;
 wire carry;
 wire err;
 
 
-SixteenBitFullAddSub addsub(dataA,dataB,mode,result, carry, err);
+SixteenBitAddSub addsub(dataA,dataB,mode,result, carry, err);
 initial
 begin
 //        0123456789ABCDEF
 $display("Addition");
 mode=0;
-dataA=16'b1000000000000000; 
-dataB=16'b0000000000000001;
+dataA=16'b1111111111111111; 
+dataB=16'b1111111111111111;
 #100;
 
 $write("mode=%b;",mode);
@@ -102,8 +102,8 @@ $display("err=%b",err);
 
 $display("Subtraction");
 mode=1;
-dataA=16'b1000000000000000; 
-dataB=16'b0000000000000001;
+dataA=16'b0100000000000000; 
+dataB=16'b1000000000000000;
 #100;
 
 $write("mode=%b;",mode);
@@ -113,4 +113,3 @@ $display("err=%b",err);
 end
 
 endmodule;
-*/

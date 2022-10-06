@@ -27,15 +27,15 @@ reg [15:0]dataA;
 reg [15:0]dataB;
 reg dataC;
 //Outputs
-wire[15:0]result;
+wire[31:0]result;
 wire carry;
 SixteenBitFullAdder F4A0(dataA,dataB,dataC,carry,result);
 initial
 begin
 //        0123456789ABCDEF
 $display("Addition");
-dataA=16'b1000000000000000; 
-dataB=16'b0000000000000001;
+dataA=16'b1111111111111111; 
+dataB=16'b1111111111111111;
 dataC=0;
 #100;
 

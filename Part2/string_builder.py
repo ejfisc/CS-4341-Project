@@ -36,8 +36,8 @@ def eight():
 
 def nine():
     for i in range(1, 15):
-        print(f'Augend{i}={{Carry{i-1}, Sum{i}[15], Sum{i}[14], Sum{i}[13],\nSum{i}[12], Sum{i}[11], Sum{i}[10], Sum{i}[9],\nSum{i}[8], Sum{i}[7], Sum{i}[6], Sum{i}[5],\nSum{i}[4], Sum{i}[3], Sum{i}[2], Sum{i}[1]}};')
-        print(f'Adend{i}={{ A[{i}]&B[15],A[{i}]&B[14],A[{i}]&B[13], A[{i}]&B[12],\nA[{i}]&B[11],A[{i}]&B[10],A[{i}]&B[ 9], A[{i}]&B[ 8],\nA[{i}]&B[ 7],A[{i}]&B[ 6],A[{i}]&B[ 5], A[{i}]&B[ 4],\nA[{i}]&B[ 3],A[{i}]&B[ 2],A[{i}]&B[ 1], A[{i}]&B[ 0]}};')
+        print(f'Augend{i}={{Carry{i-1}, Sum{i-1}[15], Sum{i-1}[14], Sum{i-1}[13],\n\t\t\tSum{i-1}[12], Sum{i-1}[11], Sum{i-1}[10], Sum{i-1}[9],\n\t\t\tSum{i-1}[8], Sum{i-1}[7], Sum{i-1}[6], Sum{i-1}[5],\n\t\t\tSum{i-1}[4], Sum{i-1}[3], Sum{i-1}[2], Sum{i-1}[1]}};')
+        print(f'Adend{i}={{ A[{i+1}]&B[15],A[{i+1}]&B[14],A[{i+1}]&B[13], A[{i+1}]&B[12],\n\t\t\tA[{i+1}]&B[11],A[{i+1}]&B[10],A[{i+1}]&B[ 9], A[{i+1}]&B[ 8],\n\t\t\tA[{i+1}]&B[ 7],A[{i+1}]&B[ 6],A[{i+1}]&B[ 5], A[{i+1}]&B[ 4],\n\t\t\tA[{i+1}]&B[ 3],A[{i+1}]&B[ 2],A[{i+1}]&B[ 1], A[{i+1}]&B[ 0]}};')
         print("")
 
 def ten():
@@ -46,4 +46,4 @@ def ten():
 def eleven():
     for i in range (15,32):
         print(f'C[{i}] = Sum14[{i-15}];')
-eleven()
+nine()
