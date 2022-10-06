@@ -1,9 +1,26 @@
-# Verilog HDL Enigma Machine - CS 4341.001 Fall 2022
+# Verilog Enigma Machine - CS 4341.001 Fall 2022 (Work in Progress)
 
 ## The Team: Enigmas
 Ethan Fischer <br> Tobias Ellis <br> Simon Xie <br> Divyaj Rijal <br> Abhay Sood
 
 For our circuit, we decided to create the notorious enigma machine, and so the name we decided on for our cohort is Enigmas (but only because we felt the name 'Nazis' was a bit innaproppriate).
+
+## How to Compile and Run
+Part1 - We got the basic fundamentals working, minterm.v outputs a truth table based on the given minterm equations
+Part2 - We designed a system that feeds input into several arithmetic modules and another input into a decoder, used to select the channel in a multiplexer which takes the output of the arithmetic modules as input. 
+### Requirements:
+Some type of verilog compiler, we used icarus verilog (iverilog). <br>
+
+In your terminal run
+```
+iverilog Part1/minterm.v -o minterm
+```
+to compile the minterm program from part 1. Then use
+```
+vvp minterm
+```
+to actually run the program and display the output. <br>
+Do the same thing for the other parts (will add more detail and such when we get there).
 
 ## Project Description
 The purpose of the project is to design a complex circuit that incorporates an ALU. <br>
@@ -41,3 +58,5 @@ The Final component of the enigma machine is the lightbulb plate which simply te
 ### How we can use digital logic in our circuit design:
 Our input (an individual letter) can be represented by an 8 bit binary number (technically we only need 5 but 8 makes things pretty and easy). 0 = A, 25 = Z. We can use arithmetic modules to control the rotation of the rotors. The modulus module can be used to rotate the second rotor every 26 rotations of the first and the third rotor every 26 rotations of the second. The add/sub module can be used to shift the logical contact points of the rotors, i.e., think of each rotor as an array of size 26, when we rotate the rotor we add one to each number in the array and Z, or 25 is reset back to 0. Each rotor could be represented by a 8:32 decoder, where the input is the letter plus some logic that scrambles the output and 26 of the outputs represent a letter which we can turn back into an 8 bit representation for input to the next decoder/rotor.
 
+## Implementation
+Everything was implemented using the verilog hardware design language. In part 1 we used a python script to generate the minterm equations and in part 2 we used a python script to generate code for the verilog program (to avoid excessive amounts of copy paste). 
