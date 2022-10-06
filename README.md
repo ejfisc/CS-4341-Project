@@ -13,7 +13,7 @@ Some type of verilog compiler, we used icarus verilog (iverilog). <br>
 
 In your terminal run
 ```
-iverilog Part1/minterm.v -o minterm
+iverilog -o minterm Part1/minterm.v
 ```
 to compile the minterm program from part 1. Then use
 ```
