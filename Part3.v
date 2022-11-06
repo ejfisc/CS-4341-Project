@@ -172,7 +172,6 @@ module DFF(clk,in,out);
 	out = in;
 endmodule
 
-
 //============================================
 //AND operation
 //============================================
@@ -191,6 +190,7 @@ begin
  
 	result=inputA&inputB;
 	outputC=result;
+	outputC[31:16] = 0;
 end
  
 endmodule
@@ -212,6 +212,7 @@ begin
  
 	result=inputA^inputB;
 	outputC=result;
+	outputC[31:16] = 0;
 end
  
 endmodule
@@ -234,6 +235,7 @@ begin
  
 	result=inputA|inputB;
 	outputC=result;
+	outputC[31:16] = 0;
 end
 
 
@@ -255,6 +257,7 @@ begin
  
 	result=inputA&inputB;
     outputC = ~result;
+	outputC[31:16] = 0;
 	
 end
  
@@ -277,6 +280,7 @@ begin
  
 	result=inputA^inputB;
 	outputC = ~result;
+	outputC[31:16] = 0;
 end
  
 endmodule
@@ -299,6 +303,7 @@ begin
  
 	result=inputA|inputB;
 	outputC = ~result;
+	outputC[31:16] = 0;
 end
 
 endmodule
@@ -316,6 +321,7 @@ begin
  
 	result=~inputA;
 	outputC=result;
+	outputC[31:16] = 0;
 end
 endmodule
 
@@ -941,20 +947,20 @@ module testbench();
  
 		 
 		 case (opcode)
-		 0: $display("%4b ==> %4b         , NO-OP",bb8.regB,bb8.b);
-		 1: $display("%4b ==> %4b         , RESET",16'b0,bb8.b);
-		 4: $display("%4b  +  %4b = %4b  , ADD"  ,bb8.regB,inputA,bb8.b);
-         5: $display("%4b  -  %4b = %4b  , SUB"  ,bb8.regB,inputA,bb8.b);
-         6: $display("%4b  *  %4b = %4b  , MULT"  ,bb8.regB,inputA,bb8.b);
-         7: $display("%4b  /  %4b = %4b  , DIV"  ,bb8.regB,inputA,bb8.b);
-         8: $display("%4b  MOD  %4b = %4b  , MOD"  ,bb8.regB,inputA,bb8.b);
-		 9: $display("%4b AND %4b = %4b  , AND"  ,bb8.regB,inputA,bb8.b);
-		 10: $display("%4b OR %4b = %4b  , OR"  ,bb8.regB,inputA,bb8.b);		 
-		 11: $display("NOT %4b = %4b  , NOT"  ,bb8.regB,bb8.b);
-         12: $display("%4b XOR %4b = %4b  , XOR"  ,bb8.regB,inputA,bb8.b);
-         13: $display("%4b NAND %4b = %4b  , NAND"  ,bb8.regB,inputA,bb8.b);	
-         14: $display("%4b NOR %4b = %4b  , NOR"  ,bb8.regB,inputA,bb8.b);
-         15: $display("%4b XNOR %4b = %4b  , XNOR"  ,bb8.regB,inputA,bb8.b);			
+		 0: $display("%4b ==> %4b         			, NO-OP	, E = %2b"	,bb8.regB,bb8.b, bb8.error);
+		 1: $display("%4b ==> %4b         			, RESET	, E = %2b"	,16'b0,bb8.b, bb8.error);
+		 4: $display("%4b  +  %4b 	= %4b  	, ADD	, E = %2b"  ,bb8.regB,inputA,bb8.b, bb8.error);
+         5: $display("%4b  -  %4b 	= %4b  	, SUB	, E = %2b"  ,bb8.regB,inputA,bb8.b, bb8.error);
+         6: $display("%4b  *  %4b 	= %4b  	, MULT	, E = %2b"  ,bb8.regB,inputA,bb8.b, bb8.error);
+         7: $display("%4b  /  %4b 	= %4b  	, DIV	, E = %2b"  ,bb8.regB,inputA,bb8.b, bb8.error);
+         8: $display("%4b  MOD  %4b = %4b  	, MOD	, E = %2b"  ,bb8.regB,inputA,bb8.b, bb8.error);
+		 9: $display("%4b AND %4b 	= %4b  	, AND	, E = %2b"  ,bb8.regB,inputA,bb8.b, bb8.error);
+		 10: $display("%4b OR %4b 	= %4b  	, OR	, E = %2b"  ,bb8.regB,inputA,bb8.b, bb8.error);		 
+		 11: $display("NOT %4b 			= %4b  	, NOT	, E = %2b"  ,bb8.regB,bb8.b, bb8.error);
+         12: $display("%4b XOR %4b 	= %4b  	, XOR	, E = %2b"  ,bb8.regB,inputA,bb8.b, bb8.error);
+         13: $display("%4b NAND %4b = %4b  	, NAND	, E = %2b"  ,bb8.regB,inputA,bb8.b, bb8.error);	
+         14: $display("%4b NOR %4b 	= %4b  	, NOR	, E = %2b"  ,bb8.regB,inputA,bb8.b, bb8.error);
+         15: $display("%4b XNOR %4b = %4b  	, XNOR	, E = %2b"  ,bb8.regB,inputA,bb8.b, bb8.error);			
 		 
 		 endcase
 		 
@@ -968,7 +974,7 @@ module testbench();
 //
 //====================================================
 
-
+b
 	initial begin//Start Stimulous Thread
     #6;	
 	//---------------------------------
