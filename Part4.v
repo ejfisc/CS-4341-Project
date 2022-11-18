@@ -900,9 +900,38 @@ module testbench();
 
    reg [15:0] triangle_base;
    reg [15:0] triangle_height;
+   reg [31:0] traingle_area;
    reg [15:0] triangle_sideA;
    reg [15:0] triangle_sideB;
    reg [15:0] triangle_sideC;
+   reg [31:0] triangle_perimeter;
+
+   reg[15:0] square_side = 16'd5;
+   reg[31:0] square_area;
+   reg[31:0] square_perimeter;
+   
+   reg[15:0] rect_sideA = 16'd5;
+   reg[15:0] rect_sideB = 16'd10;
+   reg[31:0] rect_area;
+   reg[31:0] rect_perimeter;
+
+   reg[15:0] trap_baseA = 16'd5;
+   reg[15:0] trap_baseB = 16'd10;
+   reg[15:0] trap_height = 16'd8;
+   reg[15:0] trap_sideA = 16'd8;
+   reg[15:0] trap_sideB = 16'd7;
+   reg[31:0] trap_area;
+   reg[31:0] trap_perimeter;
+
+   reg[15:0] parral_base = 16'd8;
+   reg[15:0] parral_height = 16'd16;
+   reg[15:0] parral_sideA = 16'd8;
+   reg[15:0] parral_sideB = 16'd5;
+   reg[31:0] parral_area;
+   reg[31:0] parral_perimeter;
+
+   reg[15:0] hold;
+
    
 //====================================================
 //
@@ -998,6 +1027,733 @@ breadboard bb8(clk,inputA,OpCode,Result,Error);
 	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
 	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
 
+	traingle_area = Result;
+
+	$display();
+	$display("Equation: 1/2 * Base * Height");
+	$display("Height = %d | Base = %d | Area of Traingle = %d"
+			, triangle_height, triangle_base, traingle_area);
+
+	#10;
+
+	#10;	
+	$display();
+	$display();
+	$display();
+    $display("Calculate Perimeter of Triangle");
+    $display("Equation: sideA + sideB + sideC");
+    $display("Side A = 10, | Side B = 8 | Side C = 15");
+	triangle_sideA = 10;
+   	triangle_sideB = 8;
+	triangle_sideC = 15;
+
+	$display();
+	$display("--------------------------");
+	$display("Reset");
+	clk=0;inputA=16'd0  ; OpCode=4'b0001;#5;//Reset 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error); 
+	clk=1;inputA=16'd0  ; OpCode=4'b0001;#5;//Reset 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	$display();
+	$display("--------------------------");
+	$display("Add 10 (Side A)");
+	clk=0;inputA=16'd10  ; OpCode=4'b0100;#5;//Add 2 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd10  ; OpCode=4'b0100;#5;//Add 2 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("Add 8 (Side B)");
+	clk=0;inputA=16'd8  ; OpCode=4'b0100;#5;//Add 2 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd8  ; OpCode=4'b0100;#5;//Add 2 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("Add 15 (Side C)");
+	clk=0;inputA=16'd15  ; OpCode=4'b0100;#5;//Add 2 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd15  ; OpCode=4'b0100;#5;//Add 2 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	triangle_perimeter = Result;
+
+	$display("");
+    $display("Equation: sideA + sideB + sideC");
+    $display("Side A = %d, | Side B = %d | Side C = %d | Perimeter = %d",
+			triangle_sideA, triangle_sideB, triangle_sideC, triangle_perimeter);
+
+
+
+	#10;	
+	$display();
+	$display();
+	$display();
+    $display("Calculate Area of Square");
+    $display("Equation: Length of Side ^ 2");
+    $display("Length of Side = %d", square_side);
+	
+	$display();
+	$display("--------------------------");
+	$display("Reset");
+	clk=0;inputA=16'd0  ; OpCode=4'b0001;#5;//Reset 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error); 
+	clk=1;inputA=16'd0  ; OpCode=4'b0001;#5;//Reset 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	$display();
+	$display("--------------------------");
+	$display("Add %d (Side Length)", square_side);
+	clk=0;inputA=square_side  ; OpCode=4'b0100;#5;
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=square_side  ; OpCode=4'b0100;#5;
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("Multiply by Side Length");
+	clk=0;inputA=square_side  ; OpCode=4'b0110;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=square_side  ; OpCode=4'b0110;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	square_area = Result;#5
+
+	$display("Area of Square: (%d)^2 = %d", square_side, square_area);
+
+
+	#10;	
+    $display("Calculate Perimeter of Square");
+    $display("Equation: Length of Side * 4");
+    $display("Length of Side = %d", square_side);
+	
+	$display();
+	$display("--------------------------");
+	$display("Reset");
+	clk=0;inputA=16'd0  ; OpCode=4'b0001;#5;//Reset 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error); 
+	clk=1;inputA=16'd0  ; OpCode=4'b0001;#5;//Reset 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	$display();
+	$display("--------------------------");
+	$display("Add %d (Side Length)", square_side);
+	clk=0;inputA=square_side  ; OpCode=4'b0100;#5;
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=square_side  ; OpCode=4'b0100;#5;
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("Multiply by 4");
+	clk=0;inputA=16'd4  ; OpCode=4'b0110;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd4  ; OpCode=4'b0110;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	square_perimeter = Result;#5
+
+	$display("Perimeter of Square: (%d)^2 = %d", square_side, square_perimeter);
+
+
+
+	#10;	
+	$display();
+	$display();
+	$display();
+    $display("Calculate Area of Rectangle");
+    $display("Equation: sideA * sideB");
+    $display("Length of SideA = %d", rect_sideA);
+    $display("Length of SideB = %d", rect_sideB);
+	
+	$display();
+	$display("--------------------------");
+	$display("Reset");
+	clk=0;inputA=16'd0  ; OpCode=4'b0001;#5;//Reset 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error); 
+	clk=1;inputA=16'd0  ; OpCode=4'b0001;#5;//Reset 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	$display();
+	$display("--------------------------");
+	$display("Add %d (Side A)", rect_sideA);
+	clk=0;inputA=rect_sideA  ; OpCode=4'b0100;#5;
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=rect_sideA  ; OpCode=4'b0100;#5;
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("Multiply by (Side B)");
+	clk=0;inputA=rect_sideB ; OpCode=4'b0110;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=rect_sideB ; OpCode=4'b0110;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	rect_area = Result;#5
+
+	$display("Area of Rectangle: (%d) * (%d) = %d", rect_sideA, rect_sideB, rect_area);
+
+
+
+	#10;	
+    $display("Calculate Perimeter of Rectangle");
+    $display("Equation: 2 * (sideA + sideB)");
+    $display("Length of SideA = %d", rect_sideA);
+    $display("Length of SideB = %d", rect_sideB);
+	
+	$display();
+	$display();
+	$display();
+	$display("--------------------------");
+	$display("Reset");
+	clk=0;inputA=16'd0  ; OpCode=4'b0001;#5;//Reset 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error); 
+	clk=1;inputA=16'd0  ; OpCode=4'b0001;#5;//Reset 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	$display();
+	$display("--------------------------");
+	$display("Add %d (Side A)", rect_sideA);
+	clk=0;inputA=rect_sideA  ; OpCode=4'b0100;#5;
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=rect_sideA  ; OpCode=4'b0100;#5;
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("Add %d (Side B)", rect_sideB);
+	clk=0;inputA=rect_sideB  ; OpCode=4'b0100;#5;
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=rect_sideB  ; OpCode=4'b0100;#5;
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("Multiply by 2");
+	clk=0;inputA=16'd2 ; OpCode=4'b0110;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd2 ; OpCode=4'b0110;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	rect_perimeter = Result;#5
+
+	$display("Perimeter of Rectangle: 2((%d) + (%d)) = %d", rect_sideA, rect_sideB, rect_perimeter);
+
+
+	#10;	
+	$display();
+	$display();
+	$display();
+    $display("Calculate Area of Trapezoid");
+    $display("Equation: Height/2 (Base 2 + Base 2");
+    $display("Length of Height = %d", trap_height);
+    $display("Length of Base 1 = %d", trap_baseA);
+    $display("Length of base 2 = %d", trap_baseB);
+	
+	$display();
+	$display("--------------------------");
+	$display("Reset");
+	clk=0;inputA=16'd0  ; OpCode=4'b0001;#5;//Reset 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error); 
+	clk=1;inputA=16'd0  ; OpCode=4'b0001;#5;//Reset 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	$display();
+	$display("--------------------------");
+	$display("Add %d (Height)", trap_height);
+	clk=0;inputA=trap_height ; OpCode=4'b0100;#5;
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=trap_height ; OpCode=4'b0100;#5;
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("Multiply by 2");
+	clk=0;inputA=16'd2 ; OpCode=4'b0111;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd2 ; OpCode=4'b0111;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display("Store %d in temp variable (hold)", Result);
+	hold = Result[15:0];
+
+	$display();
+	$display("--------------------------");
+	$display("Reset");
+	clk=0;inputA=16'd0  ; OpCode=4'b0001;#5;//Reset 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error); 
+	clk=1;inputA=16'd0  ; OpCode=4'b0001;#5;//Reset 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	$display();
+	$display("--------------------------");
+	$display("Add %d (Base 1)", trap_baseA);
+	clk=0;inputA=trap_baseA  ; OpCode=4'b0100;#5;
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=trap_baseA  ; OpCode=4'b0100;#5;
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("Add %d (Base 2)", trap_baseB);
+	clk=0;inputA=trap_baseB  ; OpCode=4'b0100;#5;
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=trap_baseB  ; OpCode=4'b0100;#5;
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("Multiply by Height/2 (hold)");
+	clk=0;inputA=hold ; OpCode=4'b0110;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=hold ; OpCode=4'b0110;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	trap_area = Result;#5
+
+	$display("Area of Trapezoid: (%d)/2 * ((%d) + (%d)) = %d",
+			trap_height, trap_baseA, trap_baseB, trap_area);
+
+
+	#10;	
+	$display();
+	$display();
+	$display();
+    $display("Calculate Perimeter of Trapezoid");
+    $display("Equation: Base 1 + Side 1 + Side 2 + Base 2");
+    $display("Base 1 = %d | Side 1 = %d | Side 2 = %d | Base 2 = %d ", trap_baseA, trap_sideA, trap_sideB, trap_baseB);
+
+	$display();
+	$display("--------------------------");
+	$display("Reset");
+	clk=0;inputA=16'd0  ; OpCode=4'b0001;#5;//Reset 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error); 
+	clk=1;inputA=16'd0  ; OpCode=4'b0001;#5;//Reset 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	$display();
+	$display("--------------------------");
+	$display("Add %d (Base 1", trap_baseA);
+	clk=0;inputA=trap_baseA  ; OpCode=4'b0100;#5;//Add 2 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=trap_baseA  ; OpCode=4'b0100;#5;//Add 2 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("Add %d (Side 1)", trap_sideA);
+	clk=0;inputA=trap_sideA  ; OpCode=4'b0100;#5;//Add 2 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=trap_sideA  ; OpCode=4'b0100;#5;//Add 2 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("Add %d (Side 2)", trap_sideB);
+	clk=0;inputA=trap_sideB  ; OpCode=4'b0100;#5;//Add 2 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=trap_sideB  ; OpCode=4'b0100;#5;//Add 2 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("Add %d (Base 2)", trap_baseB);
+	clk=0;inputA=trap_baseB  ; OpCode=4'b0100;#5;//Add 2 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=trap_baseB  ; OpCode=4'b0100;#5;//Add 2 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	trap_perimeter = Result;
+
+	$display();
+	$display("Equation: Base 1 + Side 1 + Side 2 + Base 2");
+    $display("Base 1 = %d | Side 1 = %d | Side 2 = %d | Base 2 = %d ", trap_baseA, trap_sideA, trap_sideB, trap_baseB);
+	$display("Perimeter = %d", trap_perimeter);
+    
+	#10;
+	$display();
+	$display();
+	$display();
+    $display("Calculate Area of Parallelogram");
+    $display("Equation: Base * Height");
+    $display("Base = %d | Height = %d", parral_base, parral_height);
+	
+	$display();
+	$display("--------------------------");
+	$display("Reset");
+	clk=0;inputA=16'd0  ; OpCode=4'b0001;#5;//Reset 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error); 
+	clk=1;inputA=16'd0  ; OpCode=4'b0001;#5;//Reset 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	$display();
+	$display("--------------------------");
+	$display("Add %d (Base)", parral_base);
+	clk=0;inputA=parral_base  ; OpCode=4'b0100;#5;
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=parral_base  ; OpCode=4'b0100;#5;
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("Multiply by %d (Height)", parral_height);
+	clk=0;inputA=parral_height  ; OpCode=4'b0110;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=parral_height  ; OpCode=4'b0110;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	parral_area = Result;#5
+
+	$display("Equation: Base * Height");
+    $display("Base = %d | Height = %d", parral_base, parral_height);
+	$display("Area of Parallelogram = %d", parral_area);
+
+	#10;	
+	$display();
+	$display();
+	$display();
+    $display("Calculate Perimeter of Parallelogram");
+    $display("Equation: 2 * (sideA + sideB)");
+    $display("Length of SideA = %d", parral_sideA);
+    $display("Length of SideB = %d", parral_sideB);
+	
+	$display();
+	$display("--------------------------");
+	$display("Reset");
+	clk=0;inputA=16'd0  ; OpCode=4'b0001;#5;//Reset 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error); 
+	clk=1;inputA=16'd0  ; OpCode=4'b0001;#5;//Reset 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	
+	$display();
+	$display("--------------------------");
+	$display("Add %d (Side A)", parral_sideA);
+	clk=0;inputA=parral_sideA  ; OpCode=4'b0100;#5;
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=parral_sideA  ; OpCode=4'b0100;#5;
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("Add %d (Side B)", parral_sideB);
+	clk=0;inputA=parral_sideB  ; OpCode=4'b0100;#5;
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=parral_sideB  ; OpCode=4'b0100;#5;
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("Multiply by 2");
+	clk=0;inputA=16'd2 ; OpCode=4'b0110;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd2 ; OpCode=4'b0110;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	$display();
+	$display("--------------------------");
+	$display("No-Op");
+	clk=0;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+	clk=1;inputA=16'd0  ; OpCode=4'b0000;#5;//No-Op 
+	$display("%b|%d|%b|%d|%b",clk,inputA,OpCode,Result,Error);
+
+	parral_perimeter = Result;#5
+
+	$display("Perimeter of Parallelogram: 2((%d) + (%d)) = %d", parral_sideA, parral_sideB, parral_perimeter);
 
 	$finish;
 	end
